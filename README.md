@@ -1,55 +1,132 @@
-ProjectHaloUK
-=============
+# Project Halo UK
 
-A place for all Project Halo related materials
-==============================================
+**Angel-eye DRL halo rings for the Alfa Romeo 159, Brera and Spider — with a
+custom UK-spec controller that drives them properly.**
 
-History
--------
-Project Halo started as a concept to integrate BMW Angel eye style DRLs into the 159/Brera/Spider triple headlight configuration. Initial development work was completed by myself & YonasH. YonasH pioneered the first sets of Halo's in a kit form that could be bought and installed as a DIY solution, however both of our efforts to disassemble the headlights resulted in failure or breakage and the only viable solution was to cut the lenses off, install the rings and glue the lenses back on.
+![Fitted halos](docs/images/gallery/fitted-02-hdr.jpg)
 
-As this was not a viable option, development ceased for around a year before starting up again after discussions with Coxy1 on headlight disassembly. Coxy1 was able to pioneer an approach the taking the headlights apart, but only if they were new ones where the glue had not yet had time to cure fully (several years of use on a car cures them fully!!)
+Project Halo was a community build that put BMW "angel eye" style LED halo rings
+inside the triple-projector headlights of the Alfa Romeo 159, Brera and Spider,
+and then built the electronics to make them behave like a factory-fit UK-spec
+daytime running light: dimming at night, going to full beam with the main beam,
+and dropping out of the way when the indicator flashes.
 
-Once this had been solved, I restarted development on the electronic controllers for the headlights to meet UK specifications and simplify the amount of electronics & wiring needed in comparison to the approach YonasH took.
+This repository is the archive of that project — the controller firmware, the
+hardware history, and the complete set of build guides, recovered from the
+original project wiki, jabawoki.com and the Alfaowner.com build thread.
 
-
-Product
--------
-This is what the headlights look like on the car:
-
-[YOUTUBE]http://www.youtube.com/watch?v=qOf9f99d9EU[/YOUTUBE]
-
-Opperation
----------
-This is a description of there operation:
-
-On start-up, they run Mode 1 once, then default to Mode 2 below:
-
-Mode 1:           Fade from 0% to 100% to 90% in sequence from Led 1 (inside) to Led 3 (outside)
-Mode 2:           Daytime operation | all Leds at 90%
-Mode 3:           Night operation | all Leds at 80%
-Mode 4:           Indicator Mode | Outer Led & inner Led rings at 50% - middle ring off
-Mode 5:           Main Beam | All rings at full power
-
-Modes 3,4 & 5 are selected by +12v signal on each of the 3 inputs to the controllers. There is a 400ms delay after the indicator stops before the rings return to Mode 2,3 or 5. This is to allow the controllers to detect that the indicator has stopped flashing. I nay yet get that down to 250-300ms but any less and it doesn't work properly.
-
-FAQ
 ---
 
-Q) Is this available as a DIY kit to install in my existing headlights?
- - Yes
+## Contents
 
-Q) Will the units work with my factory fit Xenons?
-- Yes they will
+| | |
+|---|---|
+| **[Controller](docs/controller.md)** | Modes of operation, how modes are sensed, hardware revisions Pre-Alpha → v2.2 |
+| **[Firmware](HaloProductionV2.ino)** | The production Arduino/ATmega sketch, with [notes](docs/firmware.md) |
+| **[Vehicle applications](docs/vehicle-applications.md)** | Which cars this fits, and ring sizes |
+| **[Parts list](docs/parts-list.md)** | Every component, with 2014 prices |
+| **[Tools required](docs/tools.md)** | Tools and consumables |
+| **[Bumper removal](docs/guides/bumper-removal.md)** | Alfa eLearn dealer procedure, annotated |
+| **[Headlight splitting](docs/guides/headlight-splitting.md)** | Getting a sealed headlight open without destroying it |
+| **[Installing the rings](docs/guides/ring-installation.md)** | Fitting the rings into the lens assemblies |
+| **[Headlight wiring](docs/guides/headlight-wiring.md)** | Tapping the bulb feeds, controller pinouts v2.1 and v2.2 |
+| **[Power supplies](docs/guides/power-supply.md)** | Regulated feed from the battery, relay options, voltage tuning |
+| **[DIY 12V 10s delay-off relay](docs/guides/diy-delay-off-relay.md)** | Build the timed relay yourself instead of buying one |
+| **[Controller troubleshooting](docs/guides/troubleshooting.md)** | Fixing a dead ring on a v2.x board |
+| **[Gallery](docs/gallery.md)** | Build and fitted photos |
 
-Q) Will these units work with after market HID kits, LEDs and other lighting mods?
-- Yes they will.
+---
 
-Q) Will these units work with my automatic headlight feature?
-- Yes, the switching between modes of operating is automatically controlled by the electronics inside the new headlights so it doesn't matter how they switch on and off.
+## How it works
 
-Q) How long will they last?
-- The LED rings are quoted as having 20000 hours lifespan, but I can't vouch for that!! What I can say is we have done everything electrically viable to guarantee the LED's the most optimum / safe / stable conditions fully isolated and protected from the car's electronics system so they will last as long as they possibly could.
+Each headlight gets three LED rings (85 / 90 / 95 mm) and one controller. The
+controller has no switches and no configuration — it watches the +12 V feeds to
+the bulbs already in the headlight and picks its mode from them:
 
-Q) will they work with other vehicles?
-- Technically the controller units can run 1, 2 or 3 rings each, so they could easily be adapted to be used in 147, 156, & GT's. We would just need to modify the code, and measure the headlights to get the right rings & set power loads.
+| Mode | Trigger | Behaviour |
+|---|---|---|
+| Start-up | Power on | Each ring fades 0 % → 100 % → day level in sequence, inner to outer |
+| Day | No lights on | All three rings at day level |
+| Night | Driving lights on | All three rings dimmed |
+| Main beam | Main beam on | All three rings at 100 % |
+| Indicator | Indicator on | Outer and inner rings dropped, middle ring off |
+
+Indicator mode overrides everything else, for safety. Because indicators flash,
+the sense logic is debounced with a lockout timer so the rings don't flicker
+between modes while the indicator is running.
+
+The sidelight feed is deliberately *not* used, so you can run sidelights at dusk
+without the halos dimming.
+
+Bulb feeds reach the microcontroller through opto-isolators, so the sensitive
+inputs are never exposed to automotive transients.
+
+---
+
+## Status
+
+**Archived.** This project ran from 2013 to around 2016. Controllers were
+designed, manufactured and sold to the Alfa community in three production
+revisions (v2, v2.1 green, v2.2 black). The project was later handed over to
+Chris and Samir to continue.
+
+Nothing here is for sale. The documentation and firmware are published so the
+owners of the several hundred controllers out in the wild can keep them running,
+and so anyone who wants to build their own has the full picture.
+
+---
+
+## History
+
+Project Halo started as a concept to integrate BMW angel-eye style DRLs into the
+159/Brera/Spider triple headlight configuration. Initial development work was
+done by Jay Abbott (JabawokJayUK) and YonasH. YonasH pioneered the first sets of
+halos in kit form that could be bought and installed as a DIY solution, but both
+of our attempts to disassemble the headlights ended in failure or breakage — the
+only viable route was to cut the lenses off, install the rings and glue the
+lenses back on.
+
+As that wasn't acceptable, development stopped for around a year, then restarted
+after discussions with Coxy1 about headlight disassembly. Coxy1 worked out an
+approach to taking the headlights apart, but only on *new* headlights where the
+glue hadn't had time to fully cure — several years of use on a car cures it
+completely.
+
+With that solved, development restarted on the electronic controllers: built to
+meet UK DRL specifications, and designed to need far less wiring and electronics
+than YonasH's original approach. Hardware went through a breadboard Arduino
+prototype, a through-hole v1, and then a fully surface-mount automotive-grade v2
+designed with "Xeropage", which became the v2.1 and v2.2 production boards.
+
+The full project history, several hundred pages of it, is on the
+[Alfaowner.com build thread](https://www.alfaowner.com/threads/project-halo-the-159-brera-spider-halo-drl-project.314184/).
+
+---
+
+## Credits
+
+- **JabawokJayUK (Jay Abbott)** — controller design, firmware, documentation, production
+- **YonasH** — original halo concept and first DIY kits
+- **Coxy1** — headlight disassembly method
+- **Xeropage** — v2 surface-mount hardware design
+- **Razor AMD** — DIY 12 V delay-off relay design
+- **rjc_147** — D2 diode correction on the relay circuit
+- **Chris & Samir** — took the project forward
+- The Alfaowner.com 159/Brera/Spider community
+
+---
+
+## ⚠️ Safety and legal
+
+This involves heating headlights in an oven, cutting into your car's lighting
+loom and wiring to the battery. You can ruin a set of headlights, and you can
+start a fire. Fuse everything, work on new headlights rather than the ones
+currently on your car, and know your local lighting regulations — DRL legality
+and permitted brightness vary by country.
+
+Everything here is provided as-is, with no warranty of any kind.
+
+## Licence
+
+[MIT](LICENSE) — firmware and documentation. Original photographs remain the
+copyright of their respective contributors.
