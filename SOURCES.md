@@ -70,8 +70,20 @@ Some images could not be recovered and are noted inline where they're absent:
 - **The four Alfa eLearn bumper removal diagrams.** Same cause. These are Alfa
   Romeo copyright material in any case.
 - **Various headlight splitting step photographs**, for the same reason.
+- **The LED ring / in-line regulator diagram** referenced in
+  [controller.md](docs/controller.md). This was an alfaowner.com attachment
+  (ID 171605). The forum's image CDN has since reassigned that ID and now
+  serves an unrelated image for it, so the original is unrecoverable.
 
 The text of every guide is complete.
+
+## A note on forum attachment IDs
+
+Images recovered from the alfaowner.com thread were fetched by numeric
+attachment ID. **The CDN reuses IDs** — a number that once pointed at a
+schematic can now return something entirely unrelated. Every image sourced that
+way was therefore checked visually before being committed, and several were
+rejected. If you add more, verify them by eye; do not trust the ID.
 
 ## Deliberately excluded
 

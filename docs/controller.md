@@ -127,7 +127,10 @@ The LED rings ship with a small in-line regulator box attached. **These must be
 removed** — the controller regulates the power itself using PWM, and leaving the
 regulators in place stops the controller dimming the rings.
 
-![LED and resistor diagram](images/controller/led-resistor-diagram.jpg)
+> The original forum post illustrated this with a diagram of the ring and its
+> in-line regulator. That attachment is no longer retrievable — the forum's
+> image host now serves unrelated content for its ID. See
+> [SOURCES.md](../SOURCES.md).
 
 ## Bench testing
 
