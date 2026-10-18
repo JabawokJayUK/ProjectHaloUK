@@ -22,7 +22,10 @@ original project wiki, jabawoki.com and the Alfaowner.com build thread.
 | | |
 |---|---|
 | **[Controller](docs/controller.md)** | Modes of operation, how modes are sensed, hardware revisions Pre-Alpha → v2.2 |
+| **[Hardware](docs/hardware.md)** | Schematic, PCB layout, Gerbers and DesignSpark source |
+| **[Bill of materials](docs/bom.md)** | Every component with RS/Farnell part numbers |
 | **[Firmware](HaloProductionV2.ino)** | The production Arduino/ATmega sketch, with [notes](docs/firmware.md) |
+| **[Firmware history](docs/firmware-history.md)** | The eight development sketches, and the fork |
 | **[Vehicle applications](docs/vehicle-applications.md)** | Which cars this fits, and ring sizes |
 | **[Parts list](docs/parts-list.md)** | Every component, with 2014 prices |
 | **[Tools required](docs/tools.md)** | Tools and consumables |
@@ -34,6 +37,7 @@ original project wiki, jabawoki.com and the Alfaowner.com build thread.
 | **[DIY 12V 10s delay-off relay](docs/guides/diy-delay-off-relay.md)** | Build the timed relay yourself instead of buying one |
 | **[Controller troubleshooting](docs/guides/troubleshooting.md)** | Fixing a dead ring on a v2.x board |
 | **[Gallery](docs/gallery.md)** | Build and fitted photos |
+| **[Videos](docs/videos.md)** | Nine Project Halo videos on YouTube |
 
 ---
 
@@ -99,7 +103,8 @@ prototype, a through-hole v1, and then a fully surface-mount automotive-grade v2
 designed with "Xeropage", which became the v2.1 and v2.2 production boards.
 
 The full project history, several hundred pages of it, is on the
-[Alfaowner.com build thread](https://www.alfaowner.com/threads/project-halo-the-159-brera-spider-halo-drl-project.314184/).
+[Alfaowner.com build thread](https://www.alfaowner.com/threads/project-halo-the-159-brera-spider-halo-drl-project.314184/),
+and there are nine [build videos](docs/videos.md) on YouTube.
 
 ---
 
@@ -112,6 +117,7 @@ The full project history, several hundred pages of it, is on the
 - **Razor AMD** — DIY 12 V delay-off relay design
 - **rjc_147** — D2 diode correction on the relay circuit
 - **Chris & Samir** — took the project forward
+- **Matt Brown** — post-handover firmware changes in the [fork](https://github.com/nindidooo/ProjectHaloUK)
 - The Alfaowner.com 159/Brera/Spider community
 
 ---

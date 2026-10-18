@@ -33,6 +33,30 @@ archive of the WordPress installation:
 78 pages, started 2013. The project's actual history. Schematics, PCB layouts,
 power diagrams and build photographs were recovered from thread attachments.
 
+**Jay's local project archive** — the original working directory, which
+survived on local storage and supplied material that existed nowhere online:
+
+| Path | Source |
+|---|---|
+| [hardware/designspark/](hardware/designspark/) | DesignSpark `.sch`/`.pcb`/`.prj`, from `Halo Production V2` (15 Oct 2013) |
+| [hardware/gerbers/](hardware/gerbers/) | Gerber + Excellon plot set, same revision |
+| [hardware/schematic.pdf](hardware/schematic.pdf), [pcb-layout.pdf](hardware/pcb-layout.pdf), [3d-render.pdf](hardware/3d-render.pdf) | Exported design documents |
+| [hardware/bom.xlsx](hardware/bom.xlsx) → [bom.md](docs/bom.md) | DesignSpark-generated bill of materials with RS/Farnell part numbers |
+| [firmware/development/](firmware/development/) | The eight development sketches, V1–V7 |
+| [docs/images/originals/](docs/images/originals/) | 16 camera-original photographs |
+
+The local tree held several copies of the hardware design at different dates
+(July, August and October 2013). Only the newest — `Halo Production V2` — was
+imported, to avoid shipping conflicting versions of the same board.
+
+**The fork** — [`nindidooo/ProjectHaloUK`](https://github.com/nindidooo/ProjectHaloUK)
+carries one post-handover commit by Matt Brown (Aug 2019). Not merged, but
+analysed in [firmware-history.md](docs/firmware-history.md).
+
+**YouTube** — the nine Project Halo videos on
+[@JayAbbott_UK](https://www.youtube.com/@JayAbbott_UK), indexed in
+[videos.md](docs/videos.md). All nine were confirmed live via the oEmbed API.
+
 **This repository** — `HaloProductionV2.ino` was already here, committed in
 2018. [firmware.md](docs/firmware.md) is new, written by reading the sketch.
 
@@ -48,6 +72,11 @@ Some images could not be recovered and are noted inline where they're absent:
 - **Various headlight splitting step photographs**, for the same reason.
 
 The text of every guide is complete.
+
+## Deliberately excluded
+
+`Potential buyers.xlsx` was present in the local archive. It contains customer
+contact details and is not published here.
 
 ## Editorial changes
 
